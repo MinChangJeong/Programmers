@@ -26,7 +26,6 @@ public class Programmers7 {
         	else {
         		queue.add(0);
         	}
-        	System.out.println(queue);
         	answer +=1;
         	int summary = 0;
         	for(int q : queue) {
@@ -39,9 +38,4 @@ public class Programmers7 {
         return answer;
     }
 	
-	public static void main(String [] args) {
-		Programmers7 p = new Programmers7();
-		int [] truck_weights = {7,4,5,6};
-		p.solution(2, 10, truck_weights);
-	}
 }
