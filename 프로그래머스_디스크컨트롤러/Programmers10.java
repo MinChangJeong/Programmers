@@ -6,17 +6,17 @@ public class Programmers10 {
 	public void solution(int[][] jobs) {
         int answer = 0;
         
-        //1. 원본 배열 오름차순 정렬
-        Arrays.sort(jobs, (o1,o2) -> o1[0] - o2[0]);
-//       2. 1번 확장 버전
-//        Arrays.sort(jobs, (o1, o2) -> {
-//        	if(o1[0] == o2[0]) {
-//        		return Integer.compare(o1[1], o2[1]);
-//        	}
-//        	else {
-//        		return Integer.compare(o1[0], o2[0]);
-//        	}
-//        });
+//        1. 원본 배열 오름차순 정렬
+//        	Arrays.sort(jobs, (o1,o2) -> o1[0] - o2[0]);
+//        2. 1번 확장 버전
+//	        Arrays.sort(jobs, (o1, o2) -> {
+//	        	if(o1[0] == o2[0]) {
+//	        		return Integer.compare(o1[1], o2[1]);
+//	        	}
+//	        	else {
+//	        		return Integer.compare(o1[0], o2[0]);
+//	        	}
+//	        });
 
         // 원본 배열 오름차순 정렬 (요청시간 오름차순)
  		Arrays.sort(jobs, (o1, o2) -> o1[0] - o2[0]);
