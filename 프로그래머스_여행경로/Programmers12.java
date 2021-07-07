@@ -21,6 +21,11 @@ public class Programmers12 {
 		for(String a : answer) {
 			System.out.println(a);
 		}
+//		String a = "ICN";
+//		String b = "A";
+//		
+//		System.out.println(a.compareTo(b));
+//		System.out.println(b.compareTo(a));
 		return answer;
 		
 	}
@@ -42,6 +47,10 @@ public class Programmers12 {
     	}
 
     	Collections.sort(list);
+    	
+//    	System.out.println("idx : "+ idx);
+//    	System.out.println("node : " + node);
+//    	System.out.println(list);
     	
     	// list is empty : k always 0, 이전 노드로 되돌리고 cnt+=1 그리고 현재 노드에서 check값을 false로 다시 바꿔준다. 
     	// list is not empty : k is sort 했을때 가장 첫번째 idx
@@ -81,8 +90,9 @@ public class Programmers12 {
     	
     	if(list.size() == cnt) {
     		node = answer[idx-=2];
+    		System.out.println(node);
     		for(int ci=0; ci<check_idx.length; ci++) {
-    			if(check_idx[ci] == 0) {
+    			if(check_idx[ci] == 0 && ci!=0) {
     				check[check_idx[ci-1]] = false;
     				check_idx[ci-1] = 0;
     				break;
@@ -127,16 +137,16 @@ public class Programmers12 {
     	String [][] tickets5 = {{"ICN", "AAA"}, {"ICN", "AAA"}, {"ICN", "AAA"}, {"AAA", "ICN"}, {"AAA", "ICN"}};
     	String [][] tickets6 = {{"ICN", "A"}, {"A", "B"}, {"A", "C"}, {"C", "A"}, {"B", "D"}};
     	// ["ICN", "COO", "ICN", "BOO", "DOO"]
-//    	p.solution(tickets);
-//    	System.out.println("__________");
-//    	p.solution(tickets2);
-//    	System.out.println("__________");
-//    	p.solution(tickets3);
-//    	System.out.println("__________");
-//    	p.solution(tickets4);
-//    	System.out.println("__________");
-//    	p.solution(tickets5);
-//    	System.out.println("__________");
+    	p.solution(tickets);
+    	System.out.println("__________");
+    	p.solution(tickets2);
+    	System.out.println("__________");
+    	p.solution(tickets3);
+    	System.out.println("__________");
+    	p.solution(tickets4);
+    	System.out.println("__________");
+    	p.solution(tickets5);
+    	System.out.println("__________");
     	p.solution(tickets6);
     }
 }
