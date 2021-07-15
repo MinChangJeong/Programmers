@@ -23,7 +23,7 @@ public class DP1 {
 			start = start/2;
 		} 
 		Collections.sort(nums);
-		
+		System.out.println(nums);
 		dp[0] = 1;
 		for(int num : nums) {
 			for(int i = num; i<=N; i++) {
