@@ -3,108 +3,75 @@ package 프로그래머스_베스트앨범;
 import java.util.*;
 
 public class Programmers8 {
-	public int[] solution(String[] genres, int[] plays) {
-	
-		Map<String, Integer> map = new HashMap<String, Integer>();
-		
-		Map<String, List<Integer>> lists = new HashMap<String, List<Integer>>();
-		
-		for(int i=0; i<plays.length; i++) {
-			map.put(genres[i], map.getOrDefault(genres[i], 0)+plays[i]);
-			
-			if(lists.get(genres[i]) == null) {
-				List<Integer> list = new ArrayList<Integer>();
-				list.add(i);
-				lists.put(genres[i], list);
-			}
-			else {
-				lists.get(genres[i]).add(i);
-			}
-		}
-		
-		int idx = 0;
-		int [] totals = new int[map.size()];
-		for(int total : map.values()) {
-			totals[idx] = total;
-			idx+=1;
-		}
-		
-		Arrays.sort(totals);
-		
-		Map <Integer, String> result = new HashMap<Integer, String>();
-		String [] gen = new String[map.size()];
-        int [] pla = new int[map.size()];
-
-        int id=0;
-        for(int t : map.values()) {
-        	pla[id] = t;
-        	id+=1;
-        }
-        id=0;
-        for(String g : map.keySet()) {
-        	gen[id] = g;
-        	id+=1;
-        }
-        for(int i=0; i<gen.length; i++) {
-        	result.put(pla[i], gen[i]);
-        }
-		
-        List<Integer> answer = new ArrayList<>();
-        for(int i=totals.length-1; i>=0; i--) {
-        	Queue<Integer> queue = new LinkedList<>();
-        	 
-        	String genre = result.get(totals[i]);
-        	
-        	compareResult(queue, lists.get(genre), plays);
-        	for(int j : queue) {
-        		answer.add(j);
+    public int[] solution(String[] genres, int[] plays) {
+        
+        Map<String, List<Integer>> map = new HashMap<String, List<Integer>>();
+        
+        for(int i=0; i<genres.length; i++) {
+        	if(map.get(genres[i]) != null) {
+        		List<Integer> list = map.get(genres[i]);
+        		list.add(i);
+        		map.put(genres[i], list);
+        	}
+        	else {
+        		List<Integer> list = new ArrayList<Integer>();
+        		list.add(i);
+        		map.put(genres[i], list);
         	}
         }
         
-        int [] conclusion = new int[answer.size()];
-        for(int i=0; i<answer.size(); i++) {
-        	conclusion[i] = answer.get(i);
+        Map<String, Integer> sum = new HashMap<String, Integer>();
+        Map<String, Integer> max = new HashMap<String, Integer>();
+       
+        
+        for(int i=0; i<genres.length; i++)	 {
+        	if(sum.get(genres[i]) != null) {
+        		sum.put(genres[i], sum.get(genres[i])+plays[i]);
+        	}
+        	else {
+        		sum.put(genres[i], plays[i]);
+        	}
+        	if(max.get(genres[i]) != null) {
+        		if(plays[max.get(genres[i])] < plays[i]) {
+        			max.put(genres[i], i);
+        		}
+        	}
+        	else {
+        		max.put(genres[i], i);
+        	}
         }
-        return conclusion;
-	}
-	void compareResult(Queue<Integer> queue, List<Integer> list, int [] plays) {
-		Map<Integer, List<Integer>> map = new HashMap<Integer, List<Integer>>();
-		
-		for(int i : list) {
-			if(map.get(plays[i]) == null) {
-				List<Integer> nums = new ArrayList<Integer>();
-				nums.add(i);
-				map.put(plays[i], nums);
-				continue;
-			}
-			map.get(plays[i]).add(i);
-		}
-		int [] nums = new int[map.size()];
-		
-		int idx = 0;
-		for(int i : map.keySet()) {
-			nums[idx] = i;
-			idx+=1;
-		}
-		
-		Arrays.sort(nums);
-		
-		idx=nums.length-1;
-		while(queue.size() != 2) {
-			for(int i : map.get(nums[idx])) {
-				if(queue.size() !=2) {
-					queue.add(i);
-				}
-			}
-			idx-=1;
-		}
-	}
+         
+        List<String> keyset = new ArrayList<>(sum.keySet());
+        
+        Collections.sort(keyset, (o1, o2) -> (sum.get(o2).compareTo(sum.get(o1))));
+       
+        
+        List<Integer> result = new ArrayList<Integer>();
+             
+        for(String genre : keyset) {
+        	result.add(max.get(genre));
+        	int second_max_num = 0;
+        	int idx = 0;
+        	for(int play : map.get(genre)) {
+        		if(plays[play] > second_max_num && play != max.get(genre)) {
+        			second_max_num = plays[play];
+        			idx = play;
+        		}
+        	}
+        	if(second_max_num !=0 ) {
+        		result.add(idx);
+        	}
+        	
+        }
+        
+        
+        int [] answer = new int [result.size()];
+        
+        for(int idx=0; idx<result.size(); idx++) {
+        	answer[idx] = result.get(idx);
+        }
+      
+        return answer;
+    }
 	
-	
-	public static void main(String [] args) {
-		Programmers8 p = new Programmers8();
-		String [] genres = {"classic", "pop", "classic", "classic", "pop"};
-		int [] plays = {500, 2500, 150, 800, 2500};
-		p.solution(genres, plays);
-	}
 }
