@@ -5,7 +5,7 @@
 </p>
 
 
-<h3 align="left">문제 목록</h3>
+<h3 align="left"> 문제 목록 </h3>
 <br />
 <h4 align="left">
   <a href="./프로그래머스_단어변환">1. 프로그래머스_단어변환</a>
